@@ -141,19 +141,26 @@ class _MaterialControlsState extends State<MaterialControls>
         height: barHeight,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: !chewieController.isFullScreen
+              ? CrossAxisAlignment.center
+              : CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 60,
-              child: AnimatedOpacity(
-                opacity: _hideTime ? 0.0 : 1.0,
-                duration: Duration(milliseconds: 300),
-                child: Container(
-                  child: chewieController.isLive
-                      ? Expanded(child: const Text('LIVE'))
-                      : _buildPosition(iconColor),
-                ),
-              ),
-            ),
+            !chewieController.isFullScreen
+                ? Center(
+                    child: Container(
+                      height: 60,
+                      child: AnimatedOpacity(
+                        opacity: _hideTime ? 0.0 : 1.0,
+                        duration: Duration(milliseconds: 300),
+                        child: Container(
+                          child: chewieController.isLive
+                              ? Expanded(child: const Text('LIVE'))
+                              : _buildPosition(iconColor),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(),
             GestureDetector(
               onTapDown: (details) {
                 setState(() {
@@ -179,6 +186,9 @@ class _MaterialControlsState extends State<MaterialControls>
                     child: Row(
                       children: <Widget>[
                         _buildPlayPause(controller),
+                        chewieController.isLive
+                            ? Expanded(child: const Text('LIVE'))
+                            : _buildPosition(iconColor),
                         chewieController.allowPlaybackSpeedChanging
                             ? _buildSpeedButton(controller)
                             : Container(),

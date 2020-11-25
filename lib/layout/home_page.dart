@@ -16,8 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  double scrollHeight = getData()["scrollHeight"];
-  double screenWidth = getData()["screenWidth"];
   var testAnimation = Container();
   @override
   Widget build(BuildContext context) {
@@ -32,8 +30,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
       endDrawer: Container(
         color: Colors.blue,
-        height: scrollHeight,
-        width: screenWidth,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         child: Text("drawer"),
       ),
       backgroundColor: Colors.blue,
@@ -69,7 +67,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           Positioned(
             bottom: 0,
-            width: screenWidth,
+            width: MediaQuery.of(context).size.width,
             height: 48,
             child: TabBar(
                 indicator: BoxDecoration(),

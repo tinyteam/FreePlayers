@@ -32,9 +32,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       length: 2,
       vsync: this,
     );
-    double pageHeight = getData()["pageHeight"];
-    double scrollHeight = getData()["scrollHeight"];
-    double scrollWidth = getData()["screenWidth"];
+    double pageHeight =
+        MediaQuery.of(context).size.height - kMinInteractiveDimension;
+    double scrollHeight = MediaQuery.of(context).size.height;
+    double scrollWidth = MediaQuery.of(context).size.width;
 
     return Stack(
       children: [
@@ -123,6 +124,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     return RotatedBox(
       quarterTurns: 1,
       child: Container(
+        height: scrollHeight - 56,
         child: Stack(
           children: [
             // VideoPage(scrollWidth),
@@ -196,30 +198,30 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 }
 
-Map getData() {
-  MediaQueryData mediaQuery = MediaQueryData.fromWindow(ui.window);
-  var screenUtil = ScreenUtil.getInstance();
-  var pageHeight = screenUtil.screenHeight - kMinInteractiveDimension,
-      screenWidth = screenUtil.screenWidth,
-      scrollHeight = screenUtil.screenHeight;
-  print("屏幕高度:${screenUtil.screenHeight}");
-  print("底部工具栏高度:${kBottomNavigationBarHeight}");
-  print("page高度:${pageHeight}");
-  print("tabBar高度:${pageHeight * 0.1}");
-  print("tabView高度:${pageHeight * 0.9}");
-  print("系统状态栏高度:${screenUtil.statusBarHeight}");
-  print("获取屏幕密度:${screenUtil.screenDensity}");
-  print("获取系统AppBar高度:${screenUtil.appBarHeight}");
-  print("获取屏幕密度:${screenUtil.screenDensity}");
-  print("屏幕宽度:${screenWidth}");
-  print("json:${mediaQuery.padding}");
-  print("json:${kTabLabelPadding.left}");
-  return {
-    "screenWidth": screenWidth,
-    "pageHeight": pageHeight,
-    "scrollHeight": scrollHeight,
-  };
-}
+// Map getData() {
+//   MediaQueryData mediaQuery = MediaQueryData.fromWindow(ui.window);
+//   var screenUtil = ScreenUtil.getInstance();
+//   var pageHeight = screenUtil.screenHeight - kMinInteractiveDimension,
+//       screenWidth = screenUtil.screenWidth,
+//       scrollHeight = screenUtil.screenHeight;
+//   print("屏幕高度:${screenUtil.screenHeight}");
+//   print("底部工具栏高度:${kBottomNavigationBarHeight}");
+//   print("page高度:${pageHeight}");
+//   print("tabBar高度:${pageHeight * 0.1}");
+//   print("tabView高度:${pageHeight * 0.9}");
+//   print("系统状态栏高度:${screenUtil.statusBarHeight}");
+//   print("获取屏幕密度:${screenUtil.screenDensity}");
+//   print("获取系统AppBar高度:${screenUtil.appBarHeight}");
+//   print("获取屏幕密度:${screenUtil.screenDensity}");
+//   print("屏幕宽度:${screenWidth}");
+//   print("json:${mediaQuery.padding}");
+//   print("json:${kTabLabelPadding.left}");
+//   return {
+//     "screenWidth": screenWidth,
+//     "pageHeight": pageHeight,
+//     "scrollHeight": scrollHeight,
+//   };
+// }
 
 Widget picAndTextButton(
     {String imgpath, String text, Function onPressed, isFocus}) {

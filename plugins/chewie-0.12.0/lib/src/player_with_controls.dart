@@ -38,7 +38,6 @@ class PlayerWithControls extends StatelessWidget {
           : Container();
     }
 
-    final barHeight = 100.0;
     Container _buildPlayerWithControls(
         ChewieController chewieController, BuildContext context) {
       return Container(
@@ -49,16 +48,7 @@ class PlayerWithControls extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: chewieController.aspectRatio ??
                     chewieController.videoPlayerController.value.aspectRatio,
-                child: Container(
-                  child: Stack(
-                    children: [
-                      VideoPlayer(chewieController.videoPlayerController),
-                      // Container(
-                      //   child: _buildExpandButton(barHeight, chewieController),
-                      // ),
-                    ],
-                  ),
-                ),
+                child: VideoPlayer(chewieController.videoPlayerController),
               ),
             ),
             chewieController.overlay ?? Container(),
@@ -80,33 +70,6 @@ class PlayerWithControls extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: _calculateAspectRatio(context),
           child: _buildPlayerWithControls(chewieController, context),
-        ),
-      ),
-    );
-  }
-
-  GestureDetector _buildExpandButton(
-      double barHeight, ChewieController chewieController) {
-    return GestureDetector(
-      onTap: () {},
-      child: AnimatedOpacity(
-        // opacity: _hideStuff ? 0.0 : 1.0,
-        opacity: 1.0,
-        duration: Duration(milliseconds: 300),
-        child: Container(
-          height: barHeight,
-          margin: EdgeInsets.only(right: 12.0),
-          padding: EdgeInsets.only(
-            left: 8.0,
-            right: 8.0,
-          ),
-          child: Center(
-            child: Icon(
-              chewieController.isFullScreen
-                  ? Icons.fullscreen_exit
-                  : Icons.fullscreen,
-            ),
-          ),
         ),
       ),
     );

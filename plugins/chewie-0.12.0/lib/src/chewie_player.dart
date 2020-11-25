@@ -28,7 +28,6 @@ class Chewie extends StatefulWidget {
 
   /// The [ChewieController]
   final ChewieController controller;
-
   @override
   ChewieState createState() {
     return ChewieState();
